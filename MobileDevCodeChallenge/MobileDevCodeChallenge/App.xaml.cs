@@ -1,6 +1,14 @@
 ﻿using System;
+using Autofac.Extras.CommonServiceLocator;
+using CommonServiceLocator;
+using MobileDevCodeChallenge.Services;
+using MobileDevCodeChallenge.Services.Interfaces;
+using MobileDevCodeChallenge.Utility.InjectionManager;
+using MobileDevCodeChallenge.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileDevCodeChallenge
@@ -11,7 +19,9 @@ namespace MobileDevCodeChallenge
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(InjectionManager.Container));
+
+            MainPage = InjectionManager.ResolveInstance<UpcomingListPage>();
         }
 
         protected override void OnStart()
