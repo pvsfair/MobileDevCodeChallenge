@@ -1,7 +1,13 @@
-﻿namespace MobileDevCodeChallenge.ViewModels
+﻿using System.Collections.Generic;
+using MobileDevCodeChallenge.ViewModels.Interfaces;
+
+namespace MobileDevCodeChallenge.ViewModels
 {
-    public class MovieDetailsVM
+    public class MovieDetailsVM : IViewModel
     {
-        
+        public void receiveNavigationParams(Dictionary<string, object> navParams = null)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

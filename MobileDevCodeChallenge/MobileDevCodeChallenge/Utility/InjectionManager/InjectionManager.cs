@@ -4,6 +4,7 @@ using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using MobileDevCodeChallenge.Services;
 using MobileDevCodeChallenge.Services.Interfaces;
+using MobileDevCodeChallenge.Utility.Interfaces;
 using MobileDevCodeChallenge.ViewModels;
 using MobileDevCodeChallenge.Views;
 
@@ -13,6 +14,11 @@ namespace MobileDevCodeChallenge.Utility.InjectionManager
     {
         public static IContainer Container { get; protected set; }
         public static InjectionManager Instance { get; protected set; }
+
+        public static object ResolveInstance(Type type)
+        {
+            return Container.Resolve(type);
+        }
 
         public static T ResolveInstance<T>()
         {
@@ -47,7 +53,9 @@ namespace MobileDevCodeChallenge.Utility.InjectionManager
         private static void RegisterLocalReferences(ContainerBuilder builder)
         {
             builder.RegisterType<MovieService>().As<IMovieService>();
-            builder.RegisterType<ConfigurationService>().As<IConfigurationService>();
+            builder.RegisterType<ConfigurationService>().As<IConfigurationService>().SingleInstance();
+
+            builder.RegisterType<Navigator>().As<INavigator>().SingleInstance();
 
             builder.RegisterType<UpcomingListVM>();
             builder.RegisterType<MovieDetailsVM>();
