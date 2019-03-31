@@ -86,7 +86,8 @@ namespace MobileDevCodeChallenge.ViewModels
             {
                 movie.BackdropPath = $"{_backdropUrlBase}{movie.BackdropPath}";
                 movie.PosterPath = $"{_posterUrlBase}{movie.PosterPath}";
-                movie.MainGenres = await getMainGenres(3, movie.GenreIds);
+                movie.MainGenres = await getMainGenres(movie.GenreIds, 3);
+                movie.AllGenres = await getMainGenres(movie.GenreIds);
                 var splitReleaseDate = movie.ReleaseDate.Split('-');
                 movie.ReleaseDate = $"{splitReleaseDate[2]}/{splitReleaseDate[1]}/{splitReleaseDate[0]}";
                 Movies.Add(movie);
@@ -94,9 +95,12 @@ namespace MobileDevCodeChallenge.ViewModels
 //            ListViewRefreshing = false;
         }
 
-        private async Task<string> getMainGenres(int i, List<int> movieGenreIds)
+        private async Task<string> getMainGenres(List<int> movieGenreIds, int i = -1)
         {
             var sb = new StringBuilder();
+
+            i = (i == -1) ? movieGenreIds.Count : i;
+
             for (int j = 0; j < i && j < movieGenreIds.Count; j++)
             {
                 var genreName = (await GenreService.getMovieGenre(movieGenreIds[j])).Name;

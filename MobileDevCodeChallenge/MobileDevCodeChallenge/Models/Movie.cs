@@ -51,5 +51,7 @@ namespace MobileDevCodeChallenge.Models
         public Decimal VoteAverage { get; set; }
 
         public string MainGenres { get; set; }
+
+        public string AllGenres { get; set; }
     }
 }

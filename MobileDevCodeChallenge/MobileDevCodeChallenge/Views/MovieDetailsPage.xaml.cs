@@ -12,7 +12,7 @@ namespace MobileDevCodeChallenge.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MovieDetailsPage : ContentPage
 	{
-		public MovieDetailsPage (UpcomingListVM vm)
+		public MovieDetailsPage (MovieDetailsVM vm)
 		{
 			InitializeComponent ();
             BindingContext = vm;
