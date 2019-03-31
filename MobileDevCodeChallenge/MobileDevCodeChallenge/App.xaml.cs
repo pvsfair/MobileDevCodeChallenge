@@ -19,6 +19,9 @@ namespace MobileDevCodeChallenge
     {
         public App()
         {
+            #if DEBUG
+            LiveReload.Init();
+            #endif
             InitializeComponent();
 
             ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(InjectionManager.Container));
@@ -26,7 +29,7 @@ namespace MobileDevCodeChallenge
             var navigator = InjectionManager.ResolveInstance<INavigator>();
 
             setupNavigation(navigator);
-            
+
             navigator.initNavigation<UpcomingListVM>();
         }
 

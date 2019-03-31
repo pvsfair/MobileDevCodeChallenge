@@ -29,7 +29,7 @@ namespace MobileDevCodeChallenge.Utility
         {
             var page = getPage<TViewModel>(navParams);
 
-            Application.Current.MainPage = page;
+            Application.Current.MainPage = new NavigationPage(page);
         }
 
         public async Task navigateToPageAsync<TViewModel>(Dictionary<string, object> navParams = null)

@@ -25,8 +25,10 @@ namespace MobileDevCodeChallenge.Views
         {
             if (e.Item == null)
                 return;
+            var vm = BindingContext as UpcomingListVM;
 
-            await DisplayAlert("Item Tapped", $"{(e.Item as Movie).Title} was tapped.", "OK");
+            if (vm.MovieSelectedCommand.CanExecute(e.Item))
+                vm.MovieSelectedCommand.Execute(e.Item);
 
             //Deselect Item
             ((ListView) sender).SelectedItem = null;
@@ -38,12 +40,16 @@ namespace MobileDevCodeChallenge.Views
             if (!vm.HasMoreMoviesToLoad)
                 return;
 
-            var s = e.Item as Movie;
-            if (s == vm.Movies.Last())
-            {
-                if (vm.LoadMoreMoviesCommand.CanExecute(null))
-                    vm.LoadMoreMoviesCommand.Execute(null);
-            }
+            if (e.Item != vm.Movies[vm.Movies.Count - 2])
+                return;
+
+            if (vm.LoadMoreMoviesCommand.CanExecute(null))
+                vm.LoadMoreMoviesCommand.Execute(null);
+
+        }
+
+        private void Handle_ListViewRefreshing(object sender, EventArgs e)
+        {
         }
     }
 }

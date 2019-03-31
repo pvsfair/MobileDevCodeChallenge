@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using MobileDevCodeChallenge.Services.Interfaces;
+using MobileDevCodeChallenge.Utility.InjectionManager;
 using Newtonsoft.Json;
 
 namespace MobileDevCodeChallenge.Models
@@ -47,5 +49,7 @@ namespace MobileDevCodeChallenge.Models
 
         [JsonProperty("vote_average")]
         public Decimal VoteAverage { get; set; }
+
+        public string MainGenres { get; set; }
     }
 }

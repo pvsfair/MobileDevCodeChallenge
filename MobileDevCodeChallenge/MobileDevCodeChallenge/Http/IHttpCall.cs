@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using MobileDevCodeChallenge.Models;
 
 namespace MobileDevCodeChallenge.Http
 {
@@ -14,5 +16,6 @@ namespace MobileDevCodeChallenge.Http
         IHttpCall addBodyAsJson(object body);
         Task<T> requestAsync<T>();
         Task requestAsync();
+        IHttpCall addApiKey();
     }
 }

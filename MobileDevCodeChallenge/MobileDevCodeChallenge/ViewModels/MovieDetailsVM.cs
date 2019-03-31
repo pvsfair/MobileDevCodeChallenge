@@ -7,7 +7,7 @@ namespace MobileDevCodeChallenge.ViewModels
     {
         public void receiveNavigationParams(Dictionary<string, object> navParams = null)
         {
-            throw new System.NotImplementedException();
+
         }
     }
 }

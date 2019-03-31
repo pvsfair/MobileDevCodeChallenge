@@ -55,6 +55,7 @@ namespace MobileDevCodeChallenge.Utility.InjectionManager
         {
             builder.RegisterType<MovieService>().As<IMovieService>();
             builder.RegisterType<ConfigurationService>().As<IConfigurationService>().SingleInstance();
+            builder.RegisterType<GenreService>().As<IGenreService>().SingleInstance();
 
             builder.RegisterType<Navigator>().As<INavigator>().SingleInstance();
             builder.RegisterType<HttpRequest>().As<IHttpCall>();

@@ -6,6 +6,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MobileDevCodeChallenge.Services;
+using MobileDevCodeChallenge.Utility;
 using Newtonsoft.Json;
 using Xamarin.Forms.Internals;
 
@@ -116,6 +118,12 @@ namespace MobileDevCodeChallenge.Http
             await requestAsync<object>();
         }
 
+        public IHttpCall addApiKey()
+        {
+            addQueryString("api_key", TMDbBaseConfiguration.GetApiKey());
+            return this;
+        }
+
         private HttpRequestMessage getRequet()
         {
             var request = new HttpRequestMessage();
@@ -124,8 +132,8 @@ namespace MobileDevCodeChallenge.Http
                 throw new Exception("Request Method was not set.");
 
             request.Method = Method;
-
-            request.Content = new FormUrlEncodedContent(BodyContent);//TODO: add here the json body
+            if(BodyContent.Count > 0)
+                request.Content = new FormUrlEncodedContent(BodyContent);//TODO: add here the json body
 
             Headers.ForEach(h => request.Headers.Add(h.Key, h.Value));
 

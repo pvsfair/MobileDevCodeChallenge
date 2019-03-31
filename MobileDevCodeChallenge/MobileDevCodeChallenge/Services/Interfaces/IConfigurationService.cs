@@ -6,8 +6,6 @@ namespace MobileDevCodeChallenge.Services.Interfaces
     public interface IConfigurationService
     {
         Task<Configuration> GetConfiguration();
-
-        string GetApiKey();
-        string GetBaseUrlTmdb();
+        
     }
 }
