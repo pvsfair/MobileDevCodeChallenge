@@ -26,9 +26,8 @@ namespace MobileDevCodeChallenge
             var navigator = InjectionManager.ResolveInstance<INavigator>();
 
             setupNavigation(navigator);
-
-            MainPage = InjectionManager.ResolveInstance<UpcomingListPage>();
-//            navigator.initNavigation<UpcomingListVM>();
+            
+            navigator.initNavigation<UpcomingListVM>();
         }
 
         protected override void OnStart()

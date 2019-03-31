@@ -9,5 +9,10 @@ namespace MobileDevCodeChallenge.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public MovieUpcomingResponse GetUpcomingMovies(int page)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

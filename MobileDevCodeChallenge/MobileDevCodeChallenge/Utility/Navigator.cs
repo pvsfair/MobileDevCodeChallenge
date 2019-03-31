@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using MobileDevCodeChallenge.Utility.Interfaces;
+using MobileDevCodeChallenge.ViewModels.Interfaces;
 using Xamarin.Forms;
 
 namespace MobileDevCodeChallenge.Utility
@@ -10,6 +13,7 @@ namespace MobileDevCodeChallenge.Utility
     public class Navigator : INavigator
     {
         protected Dictionary<string, Type> ViewModelRelation = new Dictionary<string, Type>();
+        public Page CurrentPage => Application.Current.MainPage;
 
         public Navigator()
         {
@@ -24,16 +28,32 @@ namespace MobileDevCodeChallenge.Utility
         public void initNavigation<TViewModel>(Dictionary<string, object> navParams = null)
         {
             var page = getPage<TViewModel>(navParams);
+
+            Application.Current.MainPage = page;
         }
 
-        public Task navigateToPageAsync<TViewModel>(Dictionary<string, object> navParams = null)
+        public async Task navigateToPageAsync<TViewModel>(Dictionary<string, object> navParams = null)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var page = getPage<TViewModel>(navParams);
+                await CurrentPage.Navigation.PushAsync(page, true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw ;
+            }
         }
 
-        public Task navigateBack(Dictionary<string, object> navParams = null)
+        public async Task navigateBack(Dictionary<string, object> navParams = null)
         {
-            throw new System.NotImplementedException();
+            Page page;
+
+            if (CurrentPage.Navigation.NavigationStack.Count > 0)
+                await CurrentPage.Navigation.PopAsync(true);
+            page = CurrentPage.Navigation.NavigationStack.LastOrDefault() ?? CurrentPage;
+            setupNavigationParams(page, navParams);
         }
 
         private Page getPage<TViewModel>(Dictionary<string, object> navParams)
@@ -45,7 +65,16 @@ namespace MobileDevCodeChallenge.Utility
             var viewType = ViewModelRelation[typeof(TViewModel).FullName];
 
             var page = InjectionManager.InjectionManager.ResolveInstance(viewType) as Page;
+
+            setupNavigationParams(page, navParams);
+
             return page;
+        }
+
+        private static void setupNavigationParams(Page page, Dictionary<string, object> navParams)
+        {
+            if (page.BindingContext is IViewModel viewModel)
+                viewModel.receiveNavigationParams(navParams);
         }
     }
 }

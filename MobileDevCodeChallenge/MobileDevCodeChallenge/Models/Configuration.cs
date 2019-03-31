@@ -1,6 +1,10 @@
-﻿namespace MobileDevCodeChallenge.Models
+﻿using System.Collections.Generic;
+
+namespace MobileDevCodeChallenge.Models
 {
-    class Configuration
+    public class Configuration
     {
+        public Images Images;
+        public List<string> ChangeKeys;
     }
 }
