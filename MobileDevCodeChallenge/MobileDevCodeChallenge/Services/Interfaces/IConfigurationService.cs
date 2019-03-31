@@ -1,12 +1,13 @@
-﻿using MobileDevCodeChallenge.Models;
+﻿using System.Threading.Tasks;
+using MobileDevCodeChallenge.Models;
 
 namespace MobileDevCodeChallenge.Services.Interfaces
 {
     public interface IConfigurationService
     {
-        Configuration GetConfiguration();
+        Task<Configuration> GetConfiguration();
 
         string GetApiKey();
-
+        string GetBaseUrlTmdb();
     }
 }

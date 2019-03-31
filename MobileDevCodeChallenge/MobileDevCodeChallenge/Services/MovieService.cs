@@ -1,18 +1,25 @@
-﻿using MobileDevCodeChallenge.Models.Responses;
+﻿using System.Threading.Tasks;
+using MobileDevCodeChallenge.Http;
+using MobileDevCodeChallenge.Models.Responses;
 using MobileDevCodeChallenge.Services.Interfaces;
+using MobileDevCodeChallenge.Utility.InjectionManager;
 
 namespace MobileDevCodeChallenge.Services
 {
     public class MovieService : IMovieService
     {
-        public MovieUpcomingResponse GetUpcomingMovies()
-        {
-            throw new System.NotImplementedException();
-        }
+        private string urlUpcomingMovies = "/movie/upcoming";
 
-        public MovieUpcomingResponse GetUpcomingMovies(int page)
+        public async Task<MovieUpcomingResponse> GetUpcomingMovies(int page = 1)
         {
-            throw new System.NotImplementedException();
+            var confService = InjectionManager.ResolveInstance<IConfigurationService>();
+            var apiKey = confService.GetApiKey();
+
+            return await InjectionManager.ResolveInstance<IHttpCall>().baseUrl(confService.GetBaseUrlTmdb())
+                                                         .asGet(urlUpcomingMovies)
+                                                         .addQueryString("api_key", confService.GetApiKey())
+                                                         .addQueryString("page", page)
+                                                         .requestAsync<MovieUpcomingResponse>();
         }
     }
 }

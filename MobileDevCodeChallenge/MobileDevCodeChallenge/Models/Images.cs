@@ -4,12 +4,12 @@ namespace MobileDevCodeChallenge.Models
 {
     public class Images
     {
-        public string BaseUrl;
-        public string SecureBaseUrl;
-        public List<string> BackdropSizes;
-        public List<string> LogoSizes;
-        public List<string> PosterSizes;
-        public List<string> ProfileSizes;
-        public List<string> StillSizes;
+        public string BaseUrl { get; set; }
+        public string SecureBaseUrl { get; set; }
+        public List<string> BackdropSizes { get; set; }
+        public List<string> LogoSizes { get; set; }
+        public List<string> PosterSizes { get; set; }
+        public List<string> ProfileSizes { get; set; }
+        public List<string> StillSizes { get; set; }
     }
 }

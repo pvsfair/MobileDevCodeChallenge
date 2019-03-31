@@ -3,31 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDevCodeChallenge.Views.UpcomingListPage">
   <ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
+            ItemsSource="{Binding Movies, Mode=TwoWay}"
             ItemTapped="Handle_ItemTapped"
+            ItemAppearing="Handle_ItemAppearing"
+            HasUnevenRows="True"
             CachingStrategy="RecycleElement">
             
-    <!--Built in Cells-->
     <ListView.ItemTemplate>
         <DataTemplate>
-            <TextCell Text="{Binding .}" />
+            <ViewCell>
+                <StackLayout>
+                    <Label Text="{Binding Title}"/>
+                </StackLayout>
+            </ViewCell>
         </DataTemplate>
     </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
+
   </ListView>
 </ContentPage>

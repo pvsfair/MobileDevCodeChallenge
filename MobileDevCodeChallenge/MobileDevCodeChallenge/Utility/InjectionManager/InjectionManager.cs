@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
+using MobileDevCodeChallenge.Http;
 using MobileDevCodeChallenge.Services;
 using MobileDevCodeChallenge.Services.Interfaces;
 using MobileDevCodeChallenge.Utility.Interfaces;
@@ -56,6 +57,7 @@ namespace MobileDevCodeChallenge.Utility.InjectionManager
             builder.RegisterType<ConfigurationService>().As<IConfigurationService>().SingleInstance();
 
             builder.RegisterType<Navigator>().As<INavigator>().SingleInstance();
+            builder.RegisterType<HttpRequest>().As<IHttpCall>();
 
             builder.RegisterType<UpcomingListVM>();
             builder.RegisterType<MovieDetailsVM>();

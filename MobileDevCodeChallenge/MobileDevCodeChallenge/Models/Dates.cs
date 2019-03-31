@@ -2,7 +2,7 @@
 {
     public class Dates
     {
-        public string Maximum;
-        public string Minimum;
+        public string Maximum { get; set; }
+        public string Minimum { get; set; }
     }
 }
