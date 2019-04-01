@@ -38,9 +38,15 @@ namespace MobileDevCodeChallenge.Views
         {
             var vm = BindingContext as UpcomingListVM;
             if (!vm.HasMoreMoviesToLoad)
+            {
                 return;
+            }
 
-            if (e.Item != vm.Movies[vm.Movies.Count - 2])
+            var loadAt = vm.Movies.Count - 3;
+
+            loadAt = (loadAt < 0) ? 0 : loadAt;
+
+            if (e.Item != vm.Movies[loadAt])
                 return;
 
             if (vm.LoadMoreMoviesCommand.CanExecute(null))
@@ -48,8 +54,13 @@ namespace MobileDevCodeChallenge.Views
 
         }
 
-        private void Handle_ListViewRefreshing(object sender, EventArgs e)
+        private void Handle_SearchEntryTextChanged(object sender, TextChangedEventArgs e)
         {
+            var vm = BindingContext as UpcomingListVM;
+
+            if (vm.FilterMoviesCommand.CanExecute(null))
+                vm.FilterMoviesCommand.Execute(null);
+
         }
     }
 }
