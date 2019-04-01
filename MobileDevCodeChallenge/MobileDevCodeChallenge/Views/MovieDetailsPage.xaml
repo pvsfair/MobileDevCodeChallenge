@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileDevCodeChallenge.Views.MovieDetailsPage"
+             Title="{Binding SelectedMovie.Title}">
+    <ContentPage.Content>
+        <ScrollView>
+            <AbsoluteLayout BindingContext="{Binding SelectedMovie}" HorizontalOptions="FillAndExpand">
+                <Image Source="{Binding BackdropPath}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional" Aspect="AspectFill" VerticalOptions="Start" HeightRequest="200"/>
+                <StackLayout Padding="15,100,15,0" HorizontalOptions="StartAndExpand">
+                    <Grid>
+                        <!-- <Grid.ColumnDefinitions> -->
+                        <!--     <ColumnDefinition Width="3*"/> -->
+                        <!--     <ColumnDefinition Width="7*"/> -->
+                        <!-- </Grid.ColumnDefinitions> -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <Frame BackgroundColor="WhiteSmoke" Padding="5" Margin="0" CornerRadius="10" WidthRequest="100" HorizontalOptions="Start" VerticalOptions="Start">
+                                <Image Source="{Binding PosterPath}"/>
+                            </Frame>
+                            <Frame BackgroundColor="Transparent" Padding="0" Margin="0">
+                                <Label Margin="0,100,0,0" Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold"/>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Genres: " FontAttributes="Bold"/>
+                                <Span Text="{Binding AllGenres}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Release Date: " FontAttributes="Bold"/>
+                                <Span Text="{Binding ReleaseDate}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Overview: " FontAttributes="Bold"/>
+                                <Span Text="{Binding Overview}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
